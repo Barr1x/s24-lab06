@@ -29,11 +29,15 @@ public class Drawing {
      * @param filename file name
      */
     public void draw(String format, String filename) {
-        // TODO: Do you notice any issues here?
+        // TODO: Do you notice any issues here? 
+        // the draw method in shape already handles different types of writer.  
+        // We don't need to case them here. It's redundant.
         if (format.equals("jpeg")) {
             try (Writer writer = new JPEGWriter(filename + ".jpeg")) {
                 for (Shape shape : this.shapes) {
                     // TODO: What is the issue of the behavior here?
+                    // this two lines below can be combined and done by the draw function.
+                    // we should change draw function to take a writer and a shape as an argument.
                     Line[] lines = shape.toLines();
                     shape.draw(writer, lines);
                 }

@@ -8,7 +8,7 @@ package frogger;
 public class Frogger {
 
     // Field for task 1.
-    private final Road road;
+    final Road road;
     private int position;
     
     // Field for task 2. Anything to add/change?
@@ -36,19 +36,13 @@ public class Frogger {
      */
     public boolean move(boolean forward) {
         int nextPosition = this.position + (forward ? 1 : -1);
-        if (!isValid(nextPosition) || isOccupied(nextPosition)) {
+        if (!isValid(nextPosition) || road.isOccupied(this, nextPosition)) {
             return false;
         }
         this.position = nextPosition;
         return true;
     }
 
-    // TODO: Do you notice any issues here?
-    public boolean isOccupied(int position) {
-        boolean[] occupied = this.road.getOccupied();
-        return occupied[position];
-    }
-    
     public boolean isValid(int position) {
         if (position < 0) return false;
         boolean[] occupied = this.road.getOccupied();
@@ -61,7 +55,7 @@ public class Frogger {
      * @return true if record successful, else false.
      */
     public boolean recordMyself() {
-      boolean success = records.addRecord(firstName, lastName, phoneNumber, zipCode, state, gender);
+      boolean success = records.addRecord(FroggerID);
       return success;
     }
 
